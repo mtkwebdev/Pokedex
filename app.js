@@ -6,7 +6,6 @@ let pokemonArr = []
 const pokemonDiv = document.querySelector('.pokemonList');
 const backBtn = document.querySelector('.backBtn');
 const forwardBtn = document.querySelector('.forwardBtn');
-
 const pokemonName = document.querySelector('.pokemonName')
 const pokemonId = document.querySelector('.pokemonId')
 const pokemonType = document.querySelector('.pokemonType')
@@ -14,9 +13,6 @@ const pokemonWeight = document.querySelector('.pokemonWeight')
 const PokemonHeight = document.querySelector('.PokemonHeight')
 const pokemonFront = document.querySelector('.pokemonFront')
 const pokemonBack = document.querySelector('.pokemonBack')
-
-
-
 
 function fetchPokemonData (number){
     fetch(baseURL+`/${number}/`).then(res => {return res.json()}).then(res => {
@@ -49,11 +45,6 @@ function fetchPokemonData (number){
              )
     })
 }
-
-function capitalise(word){
-    word.charAt(0).toUpperCase()
-}
-
 
 function addPokemonDataToScreen(){
     fetch(baseURL+'?offset=0&limit=150').then(res=> res.json()).then(res => {
