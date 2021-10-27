@@ -1,39 +1,52 @@
-
-// let range1 = 1;
-// let range2 = 150;
-// const rangeURL = `?limit=${range1}&offset=${range2}`
-
 const baseURL = 'https://pokeapi.co/api/v2/pokemon'
 let id = []
 let pokemonID 
 let pokemon = {}
 let pokemonArr = []
 const pokemonDiv = document.querySelector('.pokemonList');
-
 const backBtn = document.querySelector('.backBtn');
 const forwardBtn = document.querySelector('.forwardBtn');
 
+const pokemonName = document.querySelector('.pokemonName')
+const pokemonId = document.querySelector('.pokemonId')
+const pokemonType = document.querySelector('.pokemonType')
+const pokemonWeight = document.querySelector('.pokemonWeight')
+const PokemonHeight = document.querySelector('.PokemonHeight')
+const pokemonFront = document.querySelector('.pokemonFront')
+const pokemonBack = document.querySelector('.pokemonBack')
+
+
+
+
 function fetchPokemonData (number){
     fetch(baseURL+`/${number}/`).then(res => {return res.json()}).then(res => {
-        pokemon.name = res.name;
+        const PokemonName = res.name;
+        const uppercasePokemonNames = PokemonName.charAt(0).toUpperCase(0)
+        const slicePokemonNames = PokemonName.slice(1)
+        pokemon.name = uppercasePokemonNames+slicePokemonNames
         pokemon.height = res.height+'cm';
         pokemon.weight = res.weight+'kg';
         pokemon.id = res.id;
         pokemon.type1 = res.types[0].type.name;
-        // pokemon.type2 = res.types[1].type.name;
         pokemon.spritesFront = res.sprites.front_default;
         pokemon.spritesBack = res.sprites.back_default;
+
+        pokemonName.innerHTML = pokemon.name
+        pokemonId.innerHTML = pokemon.id
+        pokemonType.innerHTML = pokemon.type1
+        pokemonWeight.innerHTML = pokemon.weight
+        PokemonHeight.innerHTML = pokemon.height
+        pokemonFront.src = pokemon.spritesFront
+        pokemonBack.src = pokemon.spritesBack
+
         console.log(
             pokemon.id,
             pokemon.name,
             pokemon.type1, 
-            // pokemon.type2,
             pokemon.height,
             pokemon.weight,
-            res
+            // res
              )
-        // console.log(results)
-        // console.log(res)
     })
 }
 
@@ -60,25 +73,19 @@ function addPokemonDataToScreen(){
 
 function idDown(){
     pokemonID--;
-    // console.log(pokemonID)
 }
 function idUp(){
     pokemonID++;
-    // console.log(pokemonID)
 }
 
 pokemonDiv.addEventListener('click',(e)=>{
-    // function handleSelectedNumbers (e){
         let selectedTarget = e.target.innerText
         let findTargetNumber = selectedTarget.split('. ')[0]
         const transformTargetToNumber = parseInt(findTargetNumber)
         id.push(transformTargetToNumber)[0];
         pokemonID = id[0]
         id = []
-        console.log(typeof(transformTargetToNumber))
-        // console.log(pokemonID)
-        // }
-    // console.log(pokemonID)
+        // console.log(typeof(transformTargetToNumber))
 })
 
 window.addEventListener('click',(e)=>{
@@ -88,6 +95,7 @@ window.addEventListener('click',(e)=>{
     if (e.target.className === 'forwardBtn'){
         idUp()
     }
-        fetchPokemonData (pokemonID)
+        fetchPokemonData(pokemonID)
 })
 addPokemonDataToScreen()
+
