@@ -1,0 +1,14 @@
+.pokemonList{
+    width: 100px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+}
+
+.pokemonItem{
+    width: 100px;
+    margin: 10px;
+    cursor: pointer;
+}
